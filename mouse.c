@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 13:45:57 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/19 22:29:11 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 13:17:58 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int			check_zone(int x, int y, t_env *env)
 	i = 0;
 	while (i < 4)
 	{
-		if (x > env->screen[i]->min_x && x <= env->screen[i]->max_x && y > env->screen[i]->min_y && y <= env->screen[i]->max_y)
-		return (env->screen[i]->order);
+		if (x > env->screen[i]->min_x && x <= env->screen[i]->max_x
+	&& y > env->screen[i]->min_y && y <= env->screen[i]->max_y)
+			return (env->screen[i]->order);
 		i++;
 	}
 	return (0);
@@ -39,10 +40,10 @@ int			julia_loop(int x, int y, t_env *env)
 		scr = env->screen[zone - 1];
 		if (zone == 1 && scr->fractal->name == 'j')
 		{
-			new_x = scr->ratio_x * (((x - scr->min_scr_x) - scr->width / 2.0) / 
-					(0.5 * scr->width)) + scr->fractal->start_x;
-			new_y = 0 - (scr->ratio_y * (((y - scr->min_scr_y) - scr->height / 2.0) /
-					(0.5 * scr->height))) + scr->fractal->start_y;
+			new_x = scr->ratio_x * (((x - scr->min_scr_x) -
+	scr->width / 2.0) / (0.5 * scr->width)) + scr->fractal->start_x;
+			new_y = 0 - (scr->ratio_y * (((y - scr->min_scr_y) -
+	scr->height / 2.0) / (0.5 * scr->height))) + scr->fractal->start_y;
 			if (new_x >= -2 && new_x <= 2)
 				scr->fractal->const_x = new_x;
 			if (new_y >= -2 && new_x <= 2)
@@ -81,4 +82,3 @@ int			mouse_hook(int button, int x, int y, t_env *env)
 		switch_screens(button, zone, env);
 	return (0);
 }
-
