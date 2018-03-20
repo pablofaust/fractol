@@ -6,13 +6,14 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 14:30:09 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 14:26:34 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 18:03:48 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	mandelbrot_iter(t_iter *iter, int nbr_iter, t_screen *scr, int pixel)
+static void	mandelbrot_iter(t_iter *iter,
+		int nbr_iter, t_screen *scr, int pixel)
 {
 	int		i;
 	double	input_y;
@@ -35,17 +36,7 @@ void	mandelbrot_iter(t_iter *iter, int nbr_iter, t_screen *scr, int pixel)
 	}
 }
 
-char	is_in_safe_range(double real_x, double real_y)
-{
-	if (real_x >= -0.52 && real_x <= 0.25 && real_y <= 0.5 && real_y >= -0.5)
-		return (1);
-	else if (real_x >= -1.15 && real_x <= -0.85 &&
-			real_y <= 0.2 && real_y >= -0.2)
-		return (1);
-	return (0);
-}
-
-void	*thread_mandelbrot(void *arg)
+static void	*thread_mandelbrot(void *arg)
 {
 	int			x;
 	int			y;
@@ -73,7 +64,7 @@ void	*thread_mandelbrot(void *arg)
 	pthread_exit(NULL);
 }
 
-int		mandelbrot(t_env *env)
+int			mandelbrot(t_env *env)
 {
 	pthread_t	thread[4];
 	t_screen	**screens;
@@ -91,7 +82,7 @@ int		mandelbrot(t_env *env)
 					(void *)screens[i]) == -1)
 		{
 			perror("pthread_create");
-			return (EXIT_FAILURE);
+			safe_exit(env);
 		}
 	}
 	i = -1;

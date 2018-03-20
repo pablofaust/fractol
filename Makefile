@@ -6,14 +6,14 @@
 #    By: cvermand <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/09 14:19:53 by cvermand          #+#    #+#              #
-#    Updated: 2018/03/20 12:08:11 by pfaust           ###   ########.fr        #
+#    Updated: 2018/03/20 17:38:40 by pfaust           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FRACTOL		=	fractol
 
 CC			=	gcc
-CFLAGS		=   -Wall -Wextra -Werror
+CFLAGS		=   -Wall -Wextra -Werror -g3
 
 _SRCS		=	main.c mandelbrot.c color.c events_listener.c julia.c \
 				buddhabrot.c antibuddhabrot.c \

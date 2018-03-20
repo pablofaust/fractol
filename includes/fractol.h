@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 14:11:27 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 15:56:09 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 17:30:32 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,12 @@ t_screen				**init_screens(t_screen **screen,
 							char menu_on, char *param);
 void					free_fractal(t_screen **screens);
 void					free_screens(t_screen **screens);
-void					events_listener(t_env *env);
+int						events_listener(t_env *env);
 unsigned int			hsv_calculator(double hue, double saturation,
 							double bright);
 unsigned int			hsl_calculator(double hue, double saturation,
 							double light);
-unsigned int			hex_to_rgb_to_hsl(unsigned int hex);
+unsigned int			hex_to_rgb_to_hsl(unsigned int hex, double light);
 unsigned int			merge_two_colors(unsigned int color1,
 							unsigned int color2);
 unsigned int			palette(int	iter);
@@ -154,14 +154,15 @@ int						mouse_hook(int button, int x, int y, t_env *env);
 int						zoom(int button, int x, int y, t_env *env);
 void					clear_image(t_env *env);
 void					color_menu(t_env *env);
-void					display_fractals(t_env *env);
-void					display_screen_one(t_env *env);
-void					clear_and_redraw(t_env *env);
+int						display_fractals(t_env *env);
+int						display_screen_one(t_env *env);
+int						clear_and_redraw(t_env *env);
 void					clear_zone(int zone, t_env *env);
-void					display_info_menu(t_env *env);
-void					toggle_info_menu(t_env *env);
+int						display_info_menu(t_env *env);
+int						toggle_info_menu(t_env *env);
 int						set_palettes(t_env *env);
-void					set_menu(t_env *env);
+int						set_menu(t_env *env);
 void					*thread_anti(void *arg);
 void					*thread_buddha(void *arg);
+void					safe_exit(t_env *env);
 #endif

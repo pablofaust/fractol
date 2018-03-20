@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 14:30:09 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 15:36:52 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 17:31:04 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	draw_fractal_pixel(t_screen *scr, int pixel_x, int pixel_y, int i)
 
 	pos = (pixel_y * WIDTH_SCREEN) + pixel_x;
 	if (pixel_x > scr->min_scr_x && pixel_x < scr->max_scr_x &&
-		pixel_y > scr->min_scr_y && pixel_y < scr->max_scr_y && i > 50)
+		pixel_y > scr->min_scr_y && pixel_y < scr->max_scr_y && i > 1)
 	{
 		if (0xffffff - scr->data_addr[pos] > scr->hex_const)
 			scr->data_addr[pos] = scr->data_addr[pos] + scr->hex_const;
@@ -27,7 +27,7 @@ static void	draw_fractal_pixel(t_screen *scr, int pixel_x, int pixel_y, int i)
 	}
 }
 
-int			iter_anti(t_iter *iter, int nbr_iter, t_screen *scr)
+static int	iter_anti(t_iter *iter, int nbr_iter, t_screen *scr)
 {
 	double		x_tmp;
 	int			i;
@@ -64,7 +64,7 @@ void		*thread_anti(void *arg)
 	t_screen	*scr;
 
 	scr = arg;
-	scr->hex_const = hex_to_rgb_to_hsl(scr->pal[scr->p][1]);
+	scr->hex_const = hex_to_rgb_to_hsl(scr->pal[scr->p][1], 0.02);
 	y = scr->min_y - 1;
 	while (++y < scr->max_y)
 	{

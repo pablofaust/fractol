@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 14:30:09 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 15:25:32 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 17:30:06 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	draw_fractal_pixel(t_screen *scr, int pixel_x, int pixel_y, int i)
 	}
 }
 
-void		first_iter_buddha(t_iter *iter, int nbr_iter, int *i)
+static void	first_iter_buddha(t_iter *iter, int nbr_iter, int *i)
 {
 	double	x_tmp;
 
@@ -40,7 +40,7 @@ void		first_iter_buddha(t_iter *iter, int nbr_iter, int *i)
 	}
 }
 
-void		correct_path_iter(t_iter *iter, int nbr_iter, t_screen *scr)
+static void	correct_path_iter(t_iter *iter, int nbr_iter, t_screen *scr)
 {
 	int				i;
 	double			pixel_x;
@@ -66,7 +66,7 @@ void		correct_path_iter(t_iter *iter, int nbr_iter, t_screen *scr)
 	}
 }
 
-int			iter_buddha(t_iter *iter, int nbr_iter, t_screen *scr)
+static int	iter_buddha(t_iter *iter, int nbr_iter, t_screen *scr)
 {
 	int		i;
 
@@ -93,7 +93,7 @@ void		*thread_buddha(void *arg)
 	t_screen	*scr;
 
 	scr = arg;
-	scr->hex_const = hex_to_rgb_to_hsl(scr->pal[scr->p][1]);
+	scr->hex_const = hex_to_rgb_to_hsl(scr->pal[scr->p][1], 0.15);
 	y = scr->min_y - 1;
 	while (++y < scr->max_y)
 	{

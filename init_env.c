@@ -6,7 +6,7 @@
 /*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 13:55:11 by pfaust            #+#    #+#             */
-/*   Updated: 2018/03/20 14:19:00 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 17:17:11 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int			init_env(t_env *env, char *av)
 	if (!(set_palettes(env)))
 		return (0);
 	env->p = 0;
+	env->mlx = NULL;
+	env->img = NULL;
+	env->win = NULL;
 	env->mlx = mlx_init();
 	if (!(env->win = mlx_new_window(env->mlx,
 					WIDTH_SCREEN, HEIGHT_SCREEN, "Fractol")))

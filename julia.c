@@ -6,13 +6,13 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:33:52 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 14:25:13 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 16:46:44 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int			iter_julia(t_iter *iter, int nbr_iter, t_screen *scr, int pixel)
+static void	iter_julia(t_iter *iter, int nbr_iter, t_screen *scr, int pixel)
 {
 	double	x_tmp;
 	int		i;
@@ -27,16 +27,15 @@ int			iter_julia(t_iter *iter, int nbr_iter, t_screen *scr, int pixel)
 		iter->y = 2 * (x_tmp * iter->y) + iter->o_y;
 		i++;
 	}
-	return (0);
 }
 
-void		init_iter(t_iter *iter, t_screen *scr)
+static void	init_iter(t_iter *iter, t_screen *scr)
 {
 	iter->o_x = scr->fractal->const_x;
 	iter->o_y = scr->fractal->const_y;
 }
 
-void		*thread_julia(void *arg)
+static void	*thread_julia(void *arg)
 {
 	int			x;
 	int			y;
@@ -83,7 +82,7 @@ int			julia(t_env *env)
 			(void *)screens[i]) == -1)
 		{
 			perror("pthread_create");
-			return (EXIT_FAILURE);
+			safe_exit(env);
 		}
 	}
 	i = -1;

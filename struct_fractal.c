@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 15:35:54 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 13:22:30 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 16:53:53 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ void		free_fractal(t_screen **screens)
 	i = 0;
 	while (i < 4)
 	{
-		fractal = screens[i]->fractal;
-		free(fractal);
+		if (screens[i]->fractal)
+		{
+			fractal = screens[i]->fractal;
+			free(fractal);
+		}
 		screens[i]->fractal = NULL;
 		i++;
 	}

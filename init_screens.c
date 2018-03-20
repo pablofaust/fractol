@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 16:59:57 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 13:09:41 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 16:51:40 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_screen	**init_screens(t_screen **screen, char menu_on, char *param)
 		screen[i]->height = ft_dim(screen[i]->max_y, screen[i]->min_y);
 		get_screen_ratio((double)screen[i]->width,
 				(double)screen[i]->height, screen[i]);
+		screen[i]->fractal = NULL;
 		if (!(screen[i]->fractal = get_fractal(p)))
 			return (0);
 		screen[i]->order = i + 1;

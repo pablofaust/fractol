@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 13:52:04 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 15:39:13 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 17:02:54 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int			zoom(int button, int x, int y, t_env *env)
 		after.y = 0 - (scr->ratio_y * ((y - scr->height / 2.0) /
 		(0.5 * scr->fractal->zoom * scr->height)));
 		zoom_start_pos(&start, &after, scr);
-		display_screen_one(env);
+		if (!(display_screen_one(env)))
+			return (0);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:40:22 by pfaust            #+#    #+#             */
-/*   Updated: 2018/03/20 15:40:29 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 16:42:15 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			antibuddhabrot(t_env *env)
 					(void *)screens[i]) == -1)
 		{
 			perror("pthread_create");
-			return (EXIT_FAILURE);
+			safe_exit(env);
 		}
 		i++;
 	}
@@ -59,7 +59,7 @@ int			buddhabrot(t_env *env)
 					(void *)screens[i]) == -1)
 		{
 			perror("pthread_create");
-			return (EXIT_FAILURE);
+			safe_exit(env);
 		}
 	}
 	i = -1;

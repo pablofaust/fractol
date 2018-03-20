@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 17:52:30 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 13:06:10 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 17:29:50 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ unsigned int	rgb_to_hex(int r, int g, int b)
 	return (hex);
 }
 
-unsigned int	rgb_to_hsl(double r, double g, double b)
+unsigned int	rgb_to_hsl(double r, double g, double b, double light)
 {
 	double	c;
 	double	l;
@@ -47,10 +47,10 @@ unsigned int	rgb_to_hsl(double r, double g, double b)
 	else
 		hue = 0;
 	saturation = c / (1.0 - fabs(2 * l - 1.0));
-	return (hsv_calculator(hue, saturation, 0.15));
+	return (hsv_calculator(hue, saturation, light));
 }
 
-unsigned int	hex_to_rgb_to_hsl(unsigned int hex)
+unsigned int	hex_to_rgb_to_hsl(unsigned int hex, double light)
 {
 	double		r;
 	double		g;
@@ -59,7 +59,7 @@ unsigned int	hex_to_rgb_to_hsl(unsigned int hex)
 	r = hex >> 16;
 	g = (hex >> 8) & 0xff;
 	b = hex & 0xff;
-	return (rgb_to_hsl(r, g, b));
+	return (rgb_to_hsl(r, g, b, light));
 }
 
 unsigned int	hsv_calculator(double hue, double saturation, double bright)

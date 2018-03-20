@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 13:45:57 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 13:28:38 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 18:06:22 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			julia_loop(int x, int y, t_env *env)
 	double		new_x;
 	double		new_y;
 
-	if (env->julia_loop == 1)
+	if (env->julia_loop == 1 && env->screen[0]->fractal->name == 'j')
 	{
 		zone = check_zone(x, y, env);
 		scr = env->screen[zone - 1];
@@ -49,13 +49,14 @@ int			julia_loop(int x, int y, t_env *env)
 			if (new_y >= -2 && new_x <= 2)
 				scr->fractal->const_y = new_y;
 			clear_zone(zone, env);
-			display_screen_one(env);
+			if (!(display_screen_one(env)))
+				return (0);
 		}
 	}
-	return (0);
+	return (1);
 }
 
-void		switch_screens(int button, int zone, t_env *env)
+int			switch_screens(int button, int zone, t_env *env)
 {
 	t_fractal	*tmp;
 
@@ -64,8 +65,10 @@ void		switch_screens(int button, int zone, t_env *env)
 		tmp = env->screen[0]->fractal;
 		env->screen[0]->fractal = env->screen[zone - 1]->fractal;
 		env->screen[zone - 1]->fractal = tmp;
-		clear_and_redraw(env);
+		if (!(clear_and_redraw(env)))
+			return (0);
 	}
+	return (1);
 }
 
 int			mouse_hook(int button, int x, int y, t_env *env)
@@ -76,8 +79,14 @@ int			mouse_hook(int button, int x, int y, t_env *env)
 		return (0);
 	zone = check_zone(x, y, env);
 	if (zone == 1 && env->zoom_enable == 1)
-		zoom(button, x, y, env);
-	else if (zone != 1)
-		switch_screens(button, zone, env);
-	return (0);
+	{
+		if (!(zoom(button, x, y, env)))
+			return (0);
+	}
+	else if (zone > 1)
+	{
+		if (!(switch_screens(button, zone, env)))
+			return (0);
+	}
+	return (1);
 }

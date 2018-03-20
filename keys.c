@@ -6,13 +6,13 @@
 /*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 13:30:59 by pfaust            #+#    #+#             */
-/*   Updated: 2018/03/20 14:18:46 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 16:47:05 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		set_julia_loop(t_env *env)
+static int	set_julia_loop(t_env *env)
 {
 	if (env->julia_loop)
 		env->julia_loop = 0;
@@ -21,10 +21,12 @@ void		set_julia_loop(t_env *env)
 	if (env->zoom_enable)
 		env->zoom_enable = 0;
 	if (env->show_info)
-		display_screen_one(env);
+		if (!(display_screen_one(env)))
+			return (0);
+	return (1);
 }
 
-int			enable_zoom(t_env *env)
+static int	enable_zoom(t_env *env)
 {
 	if (env->zoom_enable)
 		env->zoom_enable = 0;
@@ -33,11 +35,12 @@ int			enable_zoom(t_env *env)
 	if (env->julia_loop)
 		env->julia_loop = 0;
 	if (env->show_info)
-		display_screen_one(env);
-	return (0);
+		if (!(display_screen_one(env)))
+			return (0);
+	return (1);
 }
 
-int			change_palette(t_env *env, int keycode)
+static int	change_palette(t_env *env, int keycode)
 {
 	if (keycode == KEY_LEFT)
 	{
@@ -53,11 +56,12 @@ int			change_palette(t_env *env, int keycode)
 		else
 			env->p++;
 	}
-	clear_and_redraw(env);
-	return (0);
+	if (!(clear_and_redraw(env)))
+		return (0);
+	return (1);
 }
 
-int			change_iterations(int keycode, t_env *env)
+static int	change_iterations(int keycode, t_env *env)
 {
 	if (keycode == KEY_MINUS)
 	{
@@ -70,29 +74,32 @@ int			change_iterations(int keycode, t_env *env)
 	if (keycode == KEY_EQUAL)
 		env->screen[0]->fractal->iteration =
 			env->screen[0]->fractal->iteration + 10;
-	display_screen_one(env);
-	return (0);
+	if (!(display_screen_one(env)))
+		return (0);
+	return (1);
 }
 
 int			key_hook(int keycode, t_env *env)
 {
 	if (keycode == KEY_ESCAPE)
-	{
-		mlx_destroy_image(env->mlx, env->img);
-		mlx_destroy_window(env->mlx, env->win);
-		exit(EXIT_SUCCESS);
-	}
+		safe_exit(env);
 	if (keycode == KEY_I)
-		toggle_info_menu(env);
+		if (!(toggle_info_menu(env)))
+			return (0);
 	if (keycode == KEY_Z)
-		enable_zoom(env);
+		if (!(enable_zoom(env)))
+			return (0);
 	if (keycode == KEY_L)
-		set_julia_loop(env);
+		if (!(set_julia_loop(env)))
+			return (0);
 	if (keycode == KEY_M)
-		set_menu(env);
+		if (!(set_menu(env)))
+			return (0);
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
-		change_palette(env, keycode);
+		if (!(change_palette(env, keycode)))
+			return (0);
 	if (keycode == KEY_MINUS || keycode == KEY_EQUAL)
-		change_iterations(keycode, env);
+		if (!(change_iterations(keycode, env)))
+			return (0);
 	return (0);
 }

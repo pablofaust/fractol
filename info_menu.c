@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 14:59:22 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 13:28:48 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 16:42:47 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,36 @@ void		toggle_first_screen_size(t_env *env)
 			(double)env->screen[0]->height, env->screen[0]);
 }
 
-void		set_menu(t_env *env)
+int			set_menu(t_env *env)
 {
 	if (env->show_menu)
 		env->show_menu = 0;
 	else
 		env->show_menu = 1;
 	toggle_first_screen_size(env);
-	clear_and_redraw(env);
+	if (!(clear_and_redraw(env)))
+		return (0);
+	return (1);
 }
 
-void		toggle_info_menu(t_env *env)
+int			toggle_info_menu(t_env *env)
 {
 	if (env->show_info)
 	{
 		env->show_info = 0;
-		display_screen_one(env);
+		if (!display_screen_one(env))
+			return (0);
 	}
 	else
 	{
 		env->show_info = 1;
-		display_screen_one(env);
+		if (!display_screen_one(env))
+			return (0);
 	}
+	return (1);
 }
 
-void		display_info_menu(t_env *env)
+int			display_info_menu(t_env *env)
 {
 	char	*iterations;
 
@@ -62,8 +67,10 @@ void		display_info_menu(t_env *env)
 		else
 			mlx_string_put(env->mlx, env->win, 250, 15, 0xd60a29, "N");
 		mlx_string_put(env->mlx, env->win, 270, 15, 0xFFFFFF, "Iterations :");
-		iterations = ft_itoa(env->screen[0]->fractal->iteration);
+		if (!(iterations = ft_itoa(env->screen[0]->fractal->iteration)))
+			return (0);
 		mlx_string_put(env->mlx, env->win, 400, 15, 0xFFFFFF, iterations);
 		ft_strdel(&iterations);
 	}
+	return (1);
 }
