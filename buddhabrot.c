@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 14:30:09 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 14:43:53 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 15:25:32 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	draw_fractal_pixel(t_screen *scr, int pixel_x, int pixel_y, int i)
 	int	pos;
 
 	pos = (pixel_y * WIDTH_SCREEN) + pixel_x;
-	if (pixel_x > scr->min_scr_x && pixel_x < scr->max_scr_x && 
+	if (pixel_x > scr->min_scr_x && pixel_x < scr->max_scr_x &&
 		pixel_y > scr->min_scr_y && pixel_y < scr->max_scr_y && i > 10)
 	{
 		if (0xffffff - scr->data_addr[pos] > scr->hex_const)
@@ -25,7 +25,6 @@ static void	draw_fractal_pixel(t_screen *scr, int pixel_x, int pixel_y, int i)
 		else
 			scr->data_addr[pos] = 0xffffff;
 	}
-
 }
 
 void		first_iter_buddha(t_iter *iter, int nbr_iter, int *i)
@@ -53,7 +52,7 @@ void		correct_path_iter(t_iter *iter, int nbr_iter, t_screen *scr)
 	i = 0;
 	while ((iter->x * iter->x) + (iter->y * iter->y) <= 4 && i <= nbr_iter)
 	{
-		draw_fractal_pixel(scr, (int)round(pixel_x), (int)round(pixel_y), i);	
+		draw_fractal_pixel(scr, (int)round(pixel_x), (int)round(pixel_y), i);
 		x_tmp = iter->x;
 		iter->x = (x_tmp * x_tmp) - (iter->y * iter->y) + iter->o_x;
 		iter->y = 2 * (x_tmp * iter->y) + iter->o_y;
@@ -112,4 +111,3 @@ void		*thread_buddha(void *arg)
 	}
 	pthread_exit(NULL);
 }
-
