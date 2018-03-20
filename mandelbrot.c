@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 14:30:09 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 14:20:59 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 14:26:34 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ void	*thread_mandelbrot(void *arg)
 			iter.y = real_y;
 			iter.x = scr->ratio_x * (((x - scr->min_scr_x) - scr->width / 2.0) /
 			(0.5 * scr->fractal->zoom * scr->width)) + scr->fractal->start_x;
-			if (is_in_safe_range(iter.x, iter.y))
-				scr->data_addr[(y * WIDTH_SCREEN) + x] = scr->pal[scr->p][1];
-			else if (((iter.x * iter.x) + (iter.y * iter.y)) < 4)
+			if (((iter.x * iter.x) + (iter.y * iter.y)) < 4)
 				mandelbrot_iter(&iter, scr->fractal->iteration,
 					scr, (y * WIDTH_SCREEN) + x);
 		}
