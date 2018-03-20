@@ -6,13 +6,13 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 15:35:54 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/19 14:06:24 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 13:22:30 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_screen		*get_screen_ptr_by_fractal_name(t_env *env, char c)
+t_screen	*get_screen_ptr_by_fractal_name(t_env *env, char c)
 {
 	int			i;
 
@@ -25,7 +25,6 @@ t_screen		*get_screen_ptr_by_fractal_name(t_env *env, char c)
 	}
 	return (env->screen[0]);
 }
-
 
 int			get_screen_by_fractal_name(t_env *env, char c)
 {
@@ -41,7 +40,7 @@ int			get_screen_by_fractal_name(t_env *env, char c)
 	return (i);
 }
 
-void		free_fractal(t_screen	**screens)
+void		free_fractal(t_screen **screens)
 {
 	int			i;
 	t_fractal	*fractal;
@@ -56,14 +55,14 @@ void		free_fractal(t_screen	**screens)
 	}
 }
 
-t_fractal		*get_fractal(int order)
+t_fractal	*get_fractal(int order)
 {
 	t_fractal	*fractal;
 
 	if (!(fractal = ft_memalloc(sizeof(t_fractal))))
 		return (NULL);
 	fractal->start_x = 0;
-	fractal->start_y = 0;	
+	fractal->start_y = 0;
 	if (order == 1)
 		init_mandelbrot(fractal);
 	else if (order == 2)
