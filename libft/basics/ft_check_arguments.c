@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_arguments.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/08 17:42:36 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/19 13:41:00 by pfaust           ###   ########.fr       */
+/*   Created: 2018/02/13 14:24:59 by pfaust            #+#    #+#             */
+/*   Updated: 2018/02/13 14:25:01 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		print_error_message(char *exec)
 {
 	ft_putstr("Usage : ");
 	ft_putstr(exec);
-	ft_putendl(" julia | mandelbrot | buddhabrot | anti-buddhabrot");
+	ft_putendl(" <filename>");
 	return (0);
 }
 

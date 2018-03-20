@@ -3,142 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/26 16:01:33 by cvermand          #+#    #+#             */
-/*   Updated: 2017/11/30 13:40:39 by cvermand         ###   ########.fr       */
+/*   Created: 2017/12/05 14:23:24 by pfaust            #+#    #+#             */
+/*   Updated: 2018/01/03 13:25:46 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static	int		ft_found_newline(t_fd *current, char *buf,
-		int ret, char **line)
+static t_stock	*ft_newstock(int fd)
 {
-	char *str_tmp;
-	char *tmp;
+	t_stock	*new;
 
-	if ((tmp = ft_strchr(buf, '\n')))
-	{
-		if (!(*line = ft_strsub(buf, 0, ft_strlen(buf) - ft_strlen(tmp))))
-			return (-1);
-		str_tmp = *line;
-		if (!(*line = ft_strjoin(current->str, *line)))
-			return (-1);
-		ft_strdel(&str_tmp);
-		str_tmp = current->str;
-		if (!(current->str = ft_strsub(tmp, 1, ft_strlen(tmp) - 1)))
-			return (-1);
-		return (ft_strdel_n(&str_tmp) && ft_strdel_n(&buf));
-	}
-	else if (ret < BUFF_SIZE)
-	{
-		if (!(*line = ft_strjoin(current->str, buf)))
-			return (-1);
-		ft_strdel(&current->str);
-		ft_strdel(&buf);
-		return (1);
-	}
-	return (0);
+	if (!(new = (t_stock*)malloc(sizeof(t_stock))))
+		return (NULL);
+	new->fd = fd;
+	new->str = ft_strnew(0);
+	new->done = 0;
+	new->next = NULL;
+	return (new);
 }
 
-static	int		ft_read(t_fd *current, int fd, char **line, int *r)
+static char		*ft_read_file_extra(char *buf, char *eol, char **line,
+		t_stock **elem)
 {
-	char	*buf;
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ft_strsub(buf, 0, (eol - buf));
+	tmp2 = ft_strjoin((*elem)->str, tmp);
+	*line = ft_strdup(tmp2);
+	ft_strdel(&(*elem)->str);
+	ft_strdel(&tmp);
+	(*elem)->str = ft_strsub(buf, (eol - buf + 1), (ft_strlen(eol) - 1));
+	ft_strdel(&tmp2);
+	return (*line);
+}
+
+static int		free_and_empty(char **line, t_stock *elem)
+{
+	*line = ft_strdup(elem->str);
+	free(elem->str);
+	if (!(elem->str = ft_strnew(0)))
+		return (-1);
+	return (1);
+}
+
+static int		ft_read_file(const int fd, char **line, t_stock *elem)
+{
 	int		ret;
+	char	buf[BUFF_SIZE + 1];
+	char	*eol;
 	char	*tmp;
 
-	if (!(buf = ft_strnew(BUFF_SIZE)))
-		return (-1);
-	while ((ret = read(fd, buf, BUFF_SIZE)))
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
-		if ((ret = ft_found_newline(current, buf, ret, line)) != 0)
-			return (ret);
-		tmp = current->str;
-		if (!(current->str = ft_strjoin(current->str, buf)))
-			return (-1);
-		ft_strdel(&tmp);
-	}
-	if (ft_strlen(current->str) > 0)
-	{
-		if (!(*line = ft_strdup(current->str)))
-			return (-1);
-		ft_strdel(&current->str);
-		ft_strdel(&buf);
-		return (*r = 1);
-	}
-	return ((*line = current->str) ? 0 : -1);
-}
-
-static	int		ft_read_buff(t_fd *current, int fd, char **line)
-{
-	char	*origin;
-	char	*tmp;
-	int		ret;
-
-	ret = 0;
-	origin = current->str;
-	if ((tmp = ft_strchr(origin, '\n')))
-	{
-		if (!(*line = ft_strsub(origin, 0, tmp - origin)))
-			return (-1);
-		if (!(current->str = ft_strsub(tmp, 1, ft_strlen(tmp) - 1)))
-			return (-1);
-		ft_strdel(&origin);
-	}
-	else
-	{
-		if ((ret = ft_read(current, fd, line, &ret)) < 0)
-			return (-1);
-		return (ret);
-	}
-	return (1);
-}
-
-static	int		ft_get_fd_struct(const int fd, t_fd **begin, t_fd **current)
-{
-	t_fd	*previous;
-	t_fd	*tmp;
-
-	previous = NULL;
-	tmp = *begin;
-	while (*current)
-	{
-		if ((*current)->fd == fd)
+		if ((eol = ft_strchr(buf, '\n')))
+		{
+			*line = ft_read_file_extra(buf, eol, line, &elem);
 			return (1);
-		previous = (*current);
-		*current = (*current)->next;
+		}
+		else
+		{
+			tmp = elem->str;
+			elem->str = ft_strjoin(elem->str, buf);
+			ft_strdel(&tmp);
+		}
 	}
-	if (!(*current = ft_memalloc(sizeof(t_fd))))
+	if (ret == -1)
 		return (-1);
-	if (!((*current)->str = ft_strnew(0)))
-		return (-1);
-	(*current)->fd = fd;
-	if (!previous)
-		*begin = (*current);
-	else
-		previous->next = *current;
-	return (1);
+	if (ft_strlen(elem->str) > 0 && !(eol = ft_strchr(elem->str, '\n')))
+		return (free_and_empty(line, elem));
+	return (0);
 }
 
 int				get_next_line(const int fd, char **line)
 {
-	static t_fd		*list = NULL;
-	t_fd			*current;
-	int				state;
-	char			*test[2];
+	static t_stock		*list;
+	t_stock				*elem;
+	char				*eol;
+	char				*tmp;
 
-	current = list;
-	if (!line || fd < 0 || (ft_get_fd_struct(fd, &list, &current)) < 0
-			|| (state = read(fd, test, 0)) == -1)
+	if (!list && !(list = ft_newstock(fd)))
 		return (-1);
-	*line = NULL;
-	if (!current->str)
+	elem = list;
+	while (elem->fd != fd && elem->next)
+		elem = elem->next;
+	if (!elem->next && elem->fd != fd)
 	{
-		if (!(current->str = ft_strnew(0)))
-			return (-1);
+		elem->next = ft_newstock(fd);
+		elem = elem->next;
 	}
-	state = ft_read_buff(current, fd, line);
-	return (state);
+	if ((eol = ft_strchr(elem->str, '\n')))
+	{
+		*line = ft_strsub(elem->str, 0, (eol - elem->str));
+		tmp = elem->str;
+		elem->str = ft_strsub(tmp, (eol - tmp + 1), ft_strlen(eol));
+		ft_strdel(&tmp);
+		return (1);
+	}
+	return (ft_read_file(fd, line, elem));
 }

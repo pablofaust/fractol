@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/09 14:10:02 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 17:10:45 by pfaust           ###   ########.fr       */
+/*   Created: 2018/03/20 18:48:27 by pfaust            #+#    #+#             */
+/*   Updated: 2018/03/20 18:55:03 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static int		valid_argument(char *str)
 	else if (ft_strequ(str, "anti-buddhabrot"))
 		return (1);
 	else
-		ft_printf("Usage : ./fractol	julia |		mandelbrot |\
-	buddhabrot |	anti-buddhabrot\n");
+		ft_putendl("Usage : ./fractol	julia |	\
+	mandelbrot |	buddhabrot |	anti-buddhabrot");
 	return (0);
 }
 
@@ -87,11 +87,10 @@ int				main(int ac, char **av)
 	screens = NULL;
 	if (!(ft_check_arguments("./fractol", ac, 1, 1)))
 		return (0);
-	if (!(valid_argument(av[1])) || !(init_env(&env, av[1])))
-	{
-		printf("alo ? \n");
+	if (!(valid_argument(av[1])))
+		exit(EXIT_SUCCESS);
+	if (!(init_env(&env, av[1])))
 		safe_exit(&env);
-	}
 	if (!(env.screen = init_screens(screens, env.show_menu, env.param)))
 		safe_exit(&env);
 	else

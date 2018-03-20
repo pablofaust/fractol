@@ -3,49 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 21:45:36 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/14 17:15:26 by cvermand         ###   ########.fr       */
+/*   Created: 2017/11/13 14:29:33 by pfaust            #+#    #+#             */
+/*   Updated: 2017/11/21 11:48:13 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_neg(char c)
+static int		ft_issep(char c)
 {
-	if (c == '-')
-		return (-1);
-	else if (c == '+')
+	if (c == ' ' || c == '0' || (c >= '\t' && c <= '\r'))
 		return (1);
-	else
-		return (1);
+	return (0);
 }
 
-int			ft_atoi(const char *str)
+int				ft_atoi(const char *str)
 {
-	long double		res;
+	int				neg;
+	int				nb;
 	int				i;
-	long int		sign;
 
+	neg = 1;
+	nb = 0;
 	i = 0;
-	res = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+	while (ft_issep((unsigned char)str[i]) == 1)
 		i++;
-	sign = is_neg(str[i]);
-	if (str[i] == '-' || str[i] == '+')
+	if ((unsigned char)str[i] == '+')
 		i++;
-	while (ft_isdigit(str[i]))\
+	if ((unsigned char)str[i] == '-' && (unsigned char)str[i - 1] != '+')
 	{
-		res = res * 10 + (sign * (str[i++] - '0'));
-		if (res >= 9223372036854775807)
-			return (-1);
-		else if (res < -9223372036854775807)
-			return (0);
+		neg = -1;
+		i++;
 	}
-	while (res > 2147483647)
-		res = res - 4294967296;
-	while (res < -2147483648)
-		res = res + 4294967296;
-	return ((int)res);
+	while ((unsigned char)str[i])
+	{
+		if ((unsigned char)str[i] >= '0' && (unsigned char)str[i] <= '9')
+			nb = (nb * 10) + neg * ((unsigned char)str[i] - 48);
+		else
+			return (nb);
+		i++;
+	}
+	return (nb);
 }

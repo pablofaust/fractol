@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cvermand <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: pfaust   <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/03/09 14:19:53 by cvermand          #+#    #+#              #
-#    Updated: 2018/03/20 17:38:40 by pfaust           ###   ########.fr        #
+#    Created: 2018/03/09 14:19:53 by pfaust            #+#    #+#              #
+#    Updated: 2018/03/20 18:46:09 by pfaust           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 all:	$(FRACTOL)
 
-$(FRACTOL) : $(LIBFT) $(MLX) $(OBJS)
+$(FRACTOL) : $(LIBFT) $(MLX) $(OBJS) includes/fractol.h
 	@$(CC) $(CFLAGS) -o $(FRACTOL) $(OBJS) -framework OpenGL -framework AppKit -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lm -D_REENTRANT -lpthread
 	@echo "$(FRACTOL) : $(_GREEN)Done$(_END)"
 
@@ -45,7 +45,7 @@ $(LIBFT):
 $(MLX):
 	@make -C $(MLX_DIR)
 
-%.o : %.c
+%.o : %.c includes/fractol.h
 	$(CC) $(CFLAGS) -c $< -o $@ -I includes/
 
 clean:

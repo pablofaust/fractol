@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtablen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/13 16:16:18 by cvermand          #+#    #+#             */
-/*   Updated: 2018/01/14 16:51:17 by cvermand         ###   ########.fr       */
+/*   Created: 2018/02/13 14:25:50 by pfaust            #+#    #+#             */
+/*   Updated: 2018/02/13 14:25:52 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
 size_t	ft_strtablen(char **str)
 {

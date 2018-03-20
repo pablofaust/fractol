@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/09 14:11:27 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 17:30:32 by pfaust           ###   ########.fr       */
+/*   Created: 2018/03/09 14:11:27 by pfaust            #+#    #+#             */
+/*   Updated: 2018/03/20 18:58:48 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include "../libft/includes/libft.h"
 # include "../minilibx_macos/mlx.h"
 # include "mlx_keys_macos.h"
-# define WIDTH_SCREEN 1500
-# define HEIGHT_SCREEN 1000
-
+# define WIDTH_SCREEN 2560
+# define HEIGHT_SCREEN 1440
+# define FRACT_INT_MAX 2147483647
 # define MOUSE_ZOOM_IN 5
 # define MOUSE_ZOOM_OUT 4
 # define KEY_ZOOM_IN 69
@@ -37,8 +37,6 @@
 # define KEY_DOWN 125
 # define KEY_RIGHT 124
 # define KEY_RESET 15
-# define WIDTH 600
-# define HEIGHT 400
 # define MOTION_NOTIFY 6
 # define KEY_PRESS 2
 # define PTR_MOTION_MASK (1L<<6)

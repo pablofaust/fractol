@@ -3,23 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 16:25:23 by cvermand          #+#    #+#             */
-/*   Updated: 2017/11/13 18:01:06 by cvermand         ###   ########.fr       */
+/*   Created: 2017/11/14 16:53:34 by pfaust            #+#    #+#             */
+/*   Updated: 2017/11/14 17:04:23 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char	*darray;
-	unsigned char	*sarray;
+	char			*dest;
+	char			*cpy;
+	unsigned int	i;
 
-	darray = dest;
-	sarray = (void*)src;
+	dest = (char*)dst;
+	cpy = (char*)src;
+	i = 0;
 	while (n--)
-		*darray++ = *sarray++;
+	{
+		dest[i] = cpy[i];
+		i++;
+	}
 	return (dest);
 }

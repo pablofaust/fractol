@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 18:55:58 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/19 20:52:41 by pfaust           ###   ########.fr       */
+/*   Created: 2017/11/07 18:55:58 by pfaust            #+#    #+#             */
+/*   Updated: 2018/03/20 18:36:07 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,4 +121,5 @@ int					ft_max_of_3(int x, int y, int z);
 double				ft_min_of_3_double(double x, double y, double z);
 double				ft_max_of_3_double(double x, double y, double z);
 unsigned int		ft_rgb_to_hex(int r, int g, int b);
+unsigned int		ft_pow(unsigned int len);
 #endif

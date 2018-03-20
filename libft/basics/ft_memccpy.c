@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   memccpy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 18:31:27 by cvermand          #+#    #+#             */
-/*   Updated: 2017/11/15 14:44:50 by cvermand         ###   ########.fr       */
+/*   Created: 2017/11/14 17:06:34 by pfaust            #+#    #+#             */
+/*   Updated: 2017/11/17 15:11:26 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	unsigned char		*darray;
-	unsigned char		*sarray;
-	unsigned char		find;
+	unsigned char			*dest;
+	unsigned char			*cpy;
+	unsigned int			i;
 
-	darray = (unsigned char *)dst;
-	sarray = (unsigned char *)src;
-	find = (unsigned char)c;
+	dest = (unsigned char*)dst;
+	cpy = (unsigned char*)src;
+	i = 0;
 	while (n--)
 	{
-		*darray = *sarray;
-		if (*sarray == find)
-			return (++darray);
-		sarray++;
-		darray++;
+		if (cpy[i] == (unsigned char)c)
+		{
+			dest[i] = cpy[i];
+			return (&dest[i + 1]);
+		}
+		dest[i] = cpy[i];
+		i++;
 	}
 	return (NULL);
 }

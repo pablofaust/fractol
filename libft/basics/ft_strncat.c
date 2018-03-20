@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 17:45:46 by cvermand          #+#    #+#             */
-/*   Updated: 2017/11/09 17:54:56 by cvermand         ###   ########.fr       */
+/*   Created: 2017/11/10 14:46:50 by pfaust            #+#    #+#             */
+/*   Updated: 2017/11/17 15:44:57 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 char	*ft_strncat(char *dest, const char *src, size_t n)
 {
-	unsigned int		len;
-	unsigned int		pos;
+	size_t			i;
+	unsigned int	len;
 
-	len = 0;
-	pos = 0;
-	while (dest[len] != '\0')
-		len++;
-	while (pos < n && src[pos])
+	len = ft_strlen(dest);
+	i = 0;
+	while (src[i] && i < n)
 	{
-		dest[pos + len] = src[pos];
-		pos++;
+		dest[len + i] = src[i];
+		i++;
 	}
-	dest[pos + len] = '\0';
+	dest[len + i] = '\0';
 	return (dest);
 }

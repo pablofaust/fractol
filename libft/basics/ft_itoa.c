@@ -3,36 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 13:35:14 by cvermand          #+#    #+#             */
-/*   Updated: 2017/11/15 16:18:22 by cvermand         ###   ########.fr       */
+/*   Created: 2017/11/16 19:26:16 by pfaust            #+#    #+#             */
+/*   Updated: 2017/11/23 12:04:25 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_get_expo(int len)
+static size_t			ft_itoalen(unsigned int n)
 {
-	int exp;
-
-	exp = 1;
-	while (len > 0)
-	{
-		exp = exp * 10;
-		len--;
-	}
-	return (exp);
-}
-
-static int		ft_len_int(int n)
-{
-	int len;
+	size_t		len;
 
 	len = 0;
-	if (n == 0)
-		return (1);
-	while (n != 0)
+	while (n > 0)
 	{
 		n = n / 10;
 		len++;
@@ -40,28 +25,31 @@ static int		ft_len_int(int n)
 	return (len);
 }
 
-char			*ft_itoa(int n)
+char					*ft_itoa(int n)
 {
-	int				sign;
-	unsigned int	x;
-	int				len;
-	char			*res;
-	int				y;
+	char			*itoa;
+	size_t			len;
+	unsigned int	i;
+	unsigned int	pow;
 
-	y = 0;
-	sign = (n < 0) ? 1 : 0;
-	x = ABS(n);
-	len = ft_len_int(x);
-	if (!(res = ft_strnew(len + sign)))
+	itoa = NULL;
+	if (!(itoa = (char*)malloc(sizeof(char) * (ft_itoalen(n) + 1))))
 		return (NULL);
-	len = ft_get_expo(len - 1);
-	if (sign)
-		res[y++] = '-';
+	i = 0;
+	if (n < 0)
+	{
+		itoa[i++] = '-';
+		n = (unsigned int)-n;
+	}
+	len = ft_itoalen(n);
+	if (n == 0)
+		itoa[i++] = '0';
 	while (len)
 	{
-		res[y++] = (x / len) + 48;
-		x = x % len;
-		len = len / 10;
+		pow = ft_pow(len--);
+		itoa[i++] = (n / pow) + '0';
+		n = n % pow;
 	}
-	return (res);
+	itoa[i] = '\0';
+	return (itoa);
 }

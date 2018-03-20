@@ -6,7 +6,7 @@
 /*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 13:30:59 by pfaust            #+#    #+#             */
-/*   Updated: 2018/03/20 16:47:05 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 19:00:54 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@ static int	change_iterations(int keycode, t_env *env)
 				env->screen[0]->fractal->iteration - 10;
 	}
 	if (keycode == KEY_EQUAL)
-		env->screen[0]->fractal->iteration =
-			env->screen[0]->fractal->iteration + 10;
+	{
+		if (FRACT_INT_MAX - env->screen[0]->fractal->iteration > 10)
+			env->screen[0]->fractal->iteration =
+				env->screen[0]->fractal->iteration + 10;
+	}
 	if (!(display_screen_one(env)))
 		return (0);
 	return (1);
