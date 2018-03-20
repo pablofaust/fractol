@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 14:59:22 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/19 22:27:44 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 13:07:08 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		set_menu(t_env *env)
 	clear_and_redraw(env);
 }
 
-void	toggle_info_menu(t_env *env)
+void		toggle_info_menu(t_env *env)
 {
 	if (env->show_info)
 	{
@@ -47,7 +47,7 @@ void	toggle_info_menu(t_env *env)
 	}
 }
 
-void	display_info_menu(t_env *env)
+void		display_info_menu(t_env *env)
 {
 	char	*iterations;
 
