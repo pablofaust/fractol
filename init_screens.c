@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 16:59:57 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/19 14:42:21 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 13:09:41 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int			get_order(char p, int i)
 		return (2);
 	else if ((i == 1 && p == 'b') || (i == 3 && p != 'b'))
 		return (3);
-	else if ((i == 1 && p == 'a') ||( i == 4 && p != 'a'))
+	else if ((i == 1 && p == 'a') || (i == 4 && p != 'a'))
 		return (4);
-	else 	
+	else
 		return (1);
 }
 
@@ -65,7 +65,7 @@ t_screen	**init_screens(t_screen **screen, char menu_on, char *param)
 	if (!(screen = create_screens(screen)))
 		return (NULL);
 	while (i < 4)
-	{	
+	{
 		p = get_order(param[0], i + 1);
 		screen[i]->min_x = get_x_min(i + 1);
 		screen[i]->max_x = get_x_max(i + 1, menu_on);
