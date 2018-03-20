@@ -19,7 +19,8 @@ _SRCS		=	main.c mandelbrot.c color.c events_listener.c julia.c \
 				buddhabrot.c antibuddhabrot.c \
 				struct_fractal.c screens_size.c thread_handling.c \
 				init_fractals.c init_screens.c keys.c mouse.c \
-				zoom.c clear.c info_menu.c palettes.c init_env.c
+				zoom.c clear.c info_menu.c palettes.c init_env.c \
+				fractal_threading.c
 _LIBFT		=	libft.a
 _MLX		= 	libmlx.a
 

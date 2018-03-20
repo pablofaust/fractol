@@ -157,4 +157,6 @@ void				display_info_menu(t_env *env);
 void				toggle_info_menu(t_env *env);
 int					set_palettes(t_env *env);
 void				set_menu(t_env *env);
+void				*thread_anti(void *arg);
+void				*thread_buddha(void *arg);
 #endif
