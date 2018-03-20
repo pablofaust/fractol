@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 14:11:27 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 15:45:26 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 15:56:09 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "../libft/includes/libft.h"
 # include "../minilibx_macos/mlx.h"
 # include "mlx_keys_macos.h"
-# define WIDTH_SCREEN 1000
-# define HEIGHT_SCREEN 750
+# define WIDTH_SCREEN 1500
+# define HEIGHT_SCREEN 1000
 
 # define MOUSE_ZOOM_IN 5
 # define MOUSE_ZOOM_OUT 4
