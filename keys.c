@@ -6,7 +6,7 @@
 /*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 13:30:59 by pfaust            #+#    #+#             */
-/*   Updated: 2018/03/19 22:32:51 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 13:12:16 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int			enable_zoom(t_env *env)
 		env->julia_loop = 0;
 	if (env->show_info)
 	{
-
 		printf("enable zoom\n");
 		display_screen_one(env);
 	}
@@ -71,12 +70,12 @@ int			change_iterations(int keycode, t_env *env)
 		if (env->screen[0]->fractal->iteration - 10 <= 5)
 			env->screen[0]->fractal->iteration = 5;
 		else
-			env->screen[0]->fractal->iteration 
-				= env->screen[0]->fractal->iteration - 10;
+			env->screen[0]->fractal->iteration =
+				env->screen[0]->fractal->iteration - 10;
 	}
 	if (keycode == KEY_EQUAL)
-		env->screen[0]->fractal->iteration
-			= env->screen[0]->fractal->iteration + 10;
+		env->screen[0]->fractal->iteration =
+			env->screen[0]->fractal->iteration + 10;
 	printf("change_iterations\n");
 	display_screen_one(env);
 	return (0);
