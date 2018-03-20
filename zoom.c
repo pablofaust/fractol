@@ -19,32 +19,36 @@ void		zoom_in_or_out(t_screen *scr, int button)
 	else if (button == 1)
 		scr->fractal->zoom = scr->fractal->zoom * 1.1;
 }
+void			zoom_start_pos(t_iter *start, t_iter *after, t_screen *scr)
+{
+	if (after->x >= 0)
+		scr->fractal->start_x = scr->fractal->start_x + 
+		fdim(fmax(after->x,start->x), fmin(after->x,start->x));
+	else
+		scr->fractal->start_x = scr->fractal->start_x - fdim(fmax(after->x,start->x), fmin(after->x,start->x));
+	if (after->y >= 0)
+		scr->fractal->start_y = scr->fractal->start_y + fdim(fmax(after->y,start->y), fmin(after->y,start->y));
+	else
+		scr->fractal->start_y = scr->fractal->start_y - fdim(fmax(after->y,start->y), fmin(after->y,start->y));
+
+}
 
 int			zoom(int button, int x, int y, t_env *env)
 {
 	t_screen	*scr;
-	double		start_y;
-	double		af_y;
-	double		start_x;
-	double		af_x;
+	t_iter		start;
+	t_iter		after;
 
 	if (env->julia_loop == 0)
 	{
 		scr = env->screen[0];
-		start_y = 0 - (scr->ratio_y * ((y - scr->height / 2.0) / (0.5 * scr->fractal->zoom * scr->height)));
-		start_x = scr->ratio_x * (x - scr->width / 2.0) / (0.5 * scr->fractal->zoom * scr->width);
+		start.y = 0 - (scr->ratio_y * ((y - scr->height / 2.0) / (0.5 * scr->fractal->zoom * scr->height)));
+		start.x = scr->ratio_x * (x - scr->width / 2.0) / (0.5 * scr->fractal->zoom * scr->width);
 		zoom_in_or_out(scr, button);
-		af_x = ((scr->ratio_x * (x - scr->width / 2.0) / (0.5 * scr->fractal->zoom * scr->width)));
-		af_y = 0 - (scr->ratio_y * ((y - scr->height / 2.0) / (0.5 * scr->fractal->zoom * scr->height)));
-		if (af_x >= 0)
-			scr->fractal->start_x = scr->fractal->start_x + fdim(fmax(af_x, start_x), fmin(af_x, start_x));
-		else
-			scr->fractal->start_x = scr->fractal->start_x - fdim(fmax(af_x, start_x), fmin(af_x, start_x));
-		if (af_y >= 0)
-			scr->fractal->start_y = scr->fractal->start_y + fdim(fmax(af_y, start_y), fmin(af_y, start_y));
-		else
-			scr->fractal->start_y = scr->fractal->start_y - fdim(fmax(af_y, start_y), fmin(af_y, start_y));
+		after.x = ((scr->ratio_x * (x - scr->width / 2.0) / (0.5 * scr->fractal->zoom * scr->width)));
+		after.y = 0 - (scr->ratio_y * ((y - scr->height / 2.0) / (0.5 * scr->fractal->zoom * scr->height)));
+		zoom_start_pos(&start, &after, scr);
 		display_screen_one(env);
 	}
-	return (0);
+	return (1);
 }
