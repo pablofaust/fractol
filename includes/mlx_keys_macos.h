@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_keys_macos.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/20 15:46:05 by pfaust            #+#    #+#             */
+/*   Updated: 2018/03/20 15:46:37 by pfaust           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MLX_KEYS_MACOS_H
 # define MLX_KEYS_MACOS_H
- 
 # define KEY_ESCAPE         53
 # define KEY_F1             122
 # define KEY_F2             120
@@ -118,5 +129,4 @@
 # define KEY_PAD_ADD        69
 # define KEY_PAD_ENTER      76
 # define KEY_PAD_DOT        65
- 
 #endif
