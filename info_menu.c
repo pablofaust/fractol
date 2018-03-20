@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 14:59:22 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 13:07:08 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 13:28:48 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ void		toggle_info_menu(t_env *env)
 	if (env->show_info)
 	{
 		env->show_info = 0;
-		printf("toggle info menu premier if\n");
 		display_screen_one(env);
 	}
 	else
 	{
 		env->show_info = 1;
-		printf("toggle info menu deuxieme if\n");
 		display_screen_one(env);
 	}
 }

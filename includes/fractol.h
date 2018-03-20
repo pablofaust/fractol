@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 14:11:27 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/19 21:51:15 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 14:13:44 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "../libft/includes/libft.h"
 # include "../minilibx_macos/mlx.h"
 # include "mlx_keys_macos.h"
-# define WIDTH_SCREEN 2560
-# define HEIGHT_SCREEN 1440
+# define WIDTH_SCREEN 1000
+# define HEIGHT_SCREEN 750
 
 # define MOUSE_ZOOM_IN 5
 # define MOUSE_ZOOM_OUT 4
@@ -68,14 +68,12 @@ typedef struct			s_env
 	int					win_width;
 	int					win_height;
 	int					iteration;
-	int					color;
-	int					color_size;
 	char				julia_loop;
 	char				show_menu;
 	char				zoom_enable;
 	char				show_info;
-	unsigned int		**palettes;
-	int					palette;
+	unsigned int		**pal;
+	int					p;
 	struct s_screen		**screen;
 }						t_env;
 
@@ -108,8 +106,8 @@ typedef	struct			s_screen
 	int					max_y;
 	int					width;
 	int					height;
-	unsigned int		palette;
-	unsigned int		**palettes;
+	unsigned int		p;
+	unsigned int		**pal;
 	unsigned int		hex_const;
 	unsigned int		*data_addr;
 }						t_screen;

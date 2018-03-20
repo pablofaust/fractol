@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:44:57 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 13:26:58 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 14:18:12 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ t_screen	**init_tmp_screens_info(t_screen **screens, t_env *env, int nbr_scr)
 		screens[i]->max_scr_y = env->screen[nbr_scr]->max_y;
 		screens[i]->ratio_x = env->screen[nbr_scr]->ratio_x;
 		screens[i]->ratio_y = env->screen[nbr_scr]->ratio_y;
-		screens[i]->palette = env->palette;
-		screens[i]->palettes = env->palettes;
+		screens[i]->p = env->p;
+		screens[i]->pal = env->pal;
 		i++;
 	}
 	return (screens);

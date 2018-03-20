@@ -6,13 +6,13 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 12:09:03 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/15 16:09:43 by cvermand         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:19:46 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	get_screen_ratio(double width, double height, t_screen *screen)
+void			get_screen_ratio(double width, double height, t_screen *screen)
 {
 	if (width >= height)
 	{
@@ -26,7 +26,7 @@ void	get_screen_ratio(double width, double height, t_screen *screen)
 	}
 }
 
-int			get_x_min(int order)
+int				get_x_min(int order)
 {
 	if (order == 1)
 		return (0);
@@ -34,14 +34,14 @@ int			get_x_min(int order)
 		return (WIDTH_SCREEN - (WIDTH_SCREEN / 5));
 }
 
-int			get_x_max(int order, char menu_on)
+int				get_x_max(int order, char menu_on)
 {
 	if (order == 1 && menu_on)
 		return (WIDTH_SCREEN - (WIDTH_SCREEN / 5));
 	return (WIDTH_SCREEN);
 }
 
-int			get_y_min(int order)
+int				get_y_min(int order)
 {
 	if (order == 1 || order == 2)
 		return (0);
@@ -51,7 +51,7 @@ int			get_y_min(int order)
 		return (HEIGHT_SCREEN - (HEIGHT_SCREEN / 3));
 }
 
-int			get_y_max(int order)
+int				get_y_max(int order)
 {
 	if (order == 1 || order == 4)
 		return (HEIGHT_SCREEN);

@@ -6,7 +6,7 @@
 /*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 13:30:59 by pfaust            #+#    #+#             */
-/*   Updated: 2018/03/20 13:12:16 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 14:18:46 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void		set_julia_loop(t_env *env)
 	if (env->zoom_enable)
 		env->zoom_enable = 0;
 	if (env->show_info)
-	{
-		printf("enable zoom\n");
 		display_screen_one(env);
-	}
 }
 
 int			enable_zoom(t_env *env)
@@ -36,10 +33,7 @@ int			enable_zoom(t_env *env)
 	if (env->julia_loop)
 		env->julia_loop = 0;
 	if (env->show_info)
-	{
-		printf("enable zoom\n");
 		display_screen_one(env);
-	}
 	return (0);
 }
 
@@ -47,17 +41,17 @@ int			change_palette(t_env *env, int keycode)
 {
 	if (keycode == KEY_LEFT)
 	{
-		if (env->palette == 0)
-			env->palette = 4;
+		if (env->p == 0)
+			env->p = 4;
 		else
-			env->palette--;
+			env->p--;
 	}
 	if (keycode == KEY_RIGHT)
 	{
-		if (env->palette == 4)
-			env->palette = 0;
+		if (env->p == 4)
+			env->p = 0;
 		else
-			env->palette++;
+			env->p++;
 	}
 	clear_and_redraw(env);
 	return (0);
@@ -76,7 +70,6 @@ int			change_iterations(int keycode, t_env *env)
 	if (keycode == KEY_EQUAL)
 		env->screen[0]->fractal->iteration =
 			env->screen[0]->fractal->iteration + 10;
-	printf("change_iterations\n");
 	display_screen_one(env);
 	return (0);
 }

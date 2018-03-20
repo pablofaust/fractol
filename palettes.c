@@ -6,7 +6,7 @@
 /*   By: pfaust <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 10:51:24 by pfaust            #+#    #+#             */
-/*   Updated: 2018/03/19 12:15:37 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 14:15:34 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int			set_palettes(t_env *env)
 	int				i;
 
 	i = 0;
-	if (!(env->palettes = malloc(sizeof(unsigned int*) * 5)))
+	if (!(env->pal = malloc(sizeof(unsigned int*) * 5)))
 		return (0);
 	while (i < 5)
 	{
-		if (!(env->palettes[i] = malloc(sizeof(unsigned int) * 5)))
+		if (!(env->pal[i] = malloc(sizeof(unsigned int) * 5)))
 			return (0);
 		i++;
 	}
-	fill_palettes(&env->palettes);
+	fill_palettes(&env->pal);
 	return (1);
 }

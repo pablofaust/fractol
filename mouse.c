@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 13:45:57 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/20 13:17:58 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 13:28:38 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int			julia_loop(int x, int y, t_env *env)
 			if (new_y >= -2 && new_x <= 2)
 				scr->fractal->const_y = new_y;
 			clear_zone(zone, env);
-			printf("julia_loop dams mouse\n");
 			display_screen_one(env);
 		}
 	}

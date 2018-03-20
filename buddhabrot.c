@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 14:30:09 by cvermand          #+#    #+#             */
-/*   Updated: 2018/03/19 22:39:46 by pfaust           ###   ########.fr       */
+/*   Updated: 2018/03/20 14:17:07 by pfaust           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	*thread_buddha(void *arg)
 	t_screen	*scr;
 	
 	scr = arg;
-	scr->hex_const = hex_to_rgb_to_hsl(scr->palettes[scr->palette][1]);
+	scr->hex_const = hex_to_rgb_to_hsl(scr->pal[scr->p][1]);
 	y = scr->min_y;
 	while (y < scr->max_y)
 	{
